@@ -31,6 +31,21 @@ cask "matte-gui" do
 
   app "matte-gui.app"
 
+  # MATTE ships unsigned (no Apple Developer ID). brew downloads
+  # set the `com.apple.quarantine` xattr by default, which makes
+  # Gatekeeper refuse first-launch with "developer cannot be
+  # verified". Strip the attribute right after install so the user
+  # never sees the warning. Safe to run repeatedly — `xattr -d`
+  # against a missing attribute exits non-zero, hence
+  # `must_succeed: false` (covers re-install onto an already-clean
+  # .app and pre-Sierra macOS that doesn't quarantine at all).
+  postflight do
+    system_command "/usr/bin/xattr",
+                   args:         ["-dr", "com.apple.quarantine", "#{appdir}/matte-gui.app"],
+                   sudo:         false,
+                   must_succeed: false
+  end
+
   # `zap` removes leftover settings on `brew uninstall --zap`.
   # Users who just `brew uninstall` keep their settings, which is
   # the right default — config.json + LUT paths take effort to
@@ -40,16 +55,13 @@ cask "matte-gui" do
   ]
 
   caveats <<~EOS
-    MATTE is unsigned (current v0.1.x releases ship without an
-    Apple Developer ID). If macOS refuses to launch the app the
-    first time with "matte-gui cannot be opened because the
-    developer cannot be verified", clear the quarantine bit once:
-
-        xattr -dr com.apple.quarantine "#{appdir}/matte-gui.app"
-
-    Or use System Settings → Privacy & Security → "Open Anyway".
-
     Settings persist at:
         ~/Library/Application Support/com.spinsoft.MATTE/
+
+    MATTE is unsigned (no Apple Developer ID yet). The cask
+    auto-strips the macOS quarantine bit on install, so first
+    launch should "just work". If Gatekeeper still flags it on
+    your macOS version, use System Settings → Privacy & Security
+    → "Open Anyway".
   EOS
 end
