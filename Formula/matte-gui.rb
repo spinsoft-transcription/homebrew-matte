@@ -1,22 +1,21 @@
 # MATTE — desktop bulk processor (Homebrew formula).
 #
-# This file is auto-updated by the release workflow at
-# https://github.com/spinsoft-transcription/matte/blob/main/.github/workflows/release.yml
-# on every `v*` tag push: `mislav/bump-homebrew-formula-action`
-# rewrites the `version` and `sha256` fields to match the latest
-# universal macOS tarball.
+# This file is auto-updated by the release workflow in the
+# spinsoft-transcription/matte project repo (private). The
+# release artifacts live in
+# https://github.com/spinsoft-transcription/matte-gui-release
+# (public) so anonymous brew installs can reach them.
 #
 # Install:
 #     brew install spinsoft-transcription/matte/matte-gui
 #
-# The initial placeholder version (0.0.0, dummy sha256) only
-# matters before the first release is published; the workflow
-# replaces both on its first successful run.
+# `mislav/bump-homebrew-formula-action` rewrites the `version`
+# and `sha256` fields on every `v*` tag push from the project repo.
 class MatteGui < Formula
   desc "Bulk chromakey + LUT + auto-frame compositor (iced desktop GUI)"
   homepage "https://github.com/spinsoft-transcription/matte"
   version "0.1.0"
-  url "https://github.com/spinsoft-transcription/matte/releases/download/v#{version}/matte-gui-v#{version}-macos-universal.tar.gz"
+  url "https://github.com/spinsoft-transcription/matte-gui-release/releases/download/v#{version}/matte-gui-v#{version}-macos-universal.tar.gz"
   sha256 "f2e83b3fae770688b351ab76e19f1e2e6537c8afa4f1e2c226da9c6e2fb8900c"
   license "Apache-2.0"
 
