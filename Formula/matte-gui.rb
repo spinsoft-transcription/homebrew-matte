@@ -15,9 +15,9 @@
 class MatteGui < Formula
   desc "Bulk chromakey + LUT + auto-frame compositor (iced desktop GUI)"
   homepage "https://github.com/spinsoft-transcription/matte"
-  version "0.0.0"
+  version "0.1.0"
   url "https://github.com/spinsoft-transcription/matte/releases/download/v#{version}/matte-gui-v#{version}-macos-universal.tar.gz"
-  sha256 "0000000000000000000000000000000000000000000000000000000000000000"
+  sha256 "f2e83b3fae770688b351ab76e19f1e2e6537c8afa4f1e2c226da9c6e2fb8900c"
   license "Apache-2.0"
 
   depends_on "ffmpeg"
