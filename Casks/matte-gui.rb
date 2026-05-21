@@ -3,7 +3,7 @@
 # This file is auto-updated by the release workflow in the
 # spinsoft-transcription/matte project repo (private). Each `v*`
 # tag push rewrites `version` + `sha256` here to match the latest
-# universal macOS .app tarball.
+# Apple-Silicon-only macOS .app tarball.
 #
 # Install:
 #     brew install --cask spinsoft-transcription/matte/matte-gui
@@ -27,7 +27,16 @@ cask "matte-gui" do
   # `depends_on formula: ...` only triggers when the dependency
   # isn't already installed; existing ffmpeg installs are reused.
   depends_on formula: "ffmpeg"
-  depends_on macos: ">= :catalina" # matches Info.plist LSMinimumSystemVersion 10.15
+  # Arm64-only since v0.1.4 — the macOS tarball ships a single
+  # aarch64 Mach-O, not a universal binary. Intel Macs get a clean
+  # "wrong architecture" error from brew at this gate instead of
+  # an opaque runtime crash when the binary tries to launch under
+  # Rosetta and finds no x86_64 slice.
+  depends_on arch: :arm64
+  # Bumped from Catalina with the arm64 switch: Big Sur (11.0) is
+  # the first macOS that runs on Apple Silicon. Matches the
+  # Info.plist LSMinimumSystemVersion baked into the .app.
+  depends_on macos: ">= :big_sur"
 
   app "matte-gui.app"
 
