@@ -16,10 +16,10 @@
 # install is what users actually want.
 
 cask "matte-gui" do
-  version "0.1.4"
-  sha256 "d1b82fc15a9a19fcb0e47fa8cbfae62b3a8a4ba5144d6c7e7c7a903f8f8751f8"
+  version "0.1.5"
+  sha256 "376ec5456c0fafb8cf82b7a37e197ab994a72082b9eebc139bdfe3e2850ba848"
 
-  url "https://github.com/spinsoft-transcription/matte-gui-release/releases/download/v0.1.4/matte-gui-v0.1.4-macos-arm64.tar.gz"
+  url "https://github.com/spinsoft-transcription/matte-gui-release/releases/download/v0.1.5/matte-gui-v0.1.5-macos-arm64.tar.gz"
   name "MATTE"
   desc "Bulk chromakey + LUT + auto-frame compositor (iced desktop GUI)"
   homepage "https://github.com/spinsoft-transcription/matte"
